@@ -1,3 +1,6 @@
+{{#if errorMessage}}
+    {{errorMessage}}
+{{/if}}
 <form {{action 'authenticate' on='submit'}}>
   <label for="identification">Login</label>
   {{input id='identification' placeholder='Enter Login' value=identification}}
@@ -5,3 +8,4 @@
   {{input id='password' placeholder='Enter Password' type='password' value=password}}
   <button type="submit">Login</button>
 </form>
+

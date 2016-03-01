@@ -9,8 +9,9 @@ export default Ember.Controller.extend({
         authenticator = 'authenticator:jwt';
 
       this.get('session').authenticate(authenticator, credentials).catch((message) => {
-        this.set('errorMessage', message);
+        this.set('errorMessage', message.message);
       });
     }
   }
 });
+
