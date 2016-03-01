@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
 
       this.get('session').authenticate(authenticator, credentials).catch((message) => {
         this.set('errorMessage', message);
-      });;
+      });
     }
   }
 });
