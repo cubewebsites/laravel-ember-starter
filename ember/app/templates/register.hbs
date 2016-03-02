@@ -1,0 +1,16 @@
+{{#if registered}}
+    <h1>Registered!</h1>
+    <p>Registration was successful.  You can {{link-to 'now login' 'login'}} with the credentials you registered with.</p>
+{{else}}
+{{#if errorMessage}}
+    {{errorMessage}}
+{{/if}}
+<form {{action 'register' on='submit'}}>
+    <p>Create a New Account</p>
+    <label for="identification">Email</label>
+    {{input id='identification' placeholder='Email Address' value=model.email type='email'}}
+    <label for="password">Password</label>
+    {{input id='password' placeholder='Enter Password' type='password' value=model.password}}
+    <button type="submit">Register</button>
+</form>
+{{/if}}
