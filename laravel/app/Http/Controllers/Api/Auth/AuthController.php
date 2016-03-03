@@ -15,6 +15,7 @@ use Dingo\Api\Routing\Helpers;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class AuthController extends Controller
 {
@@ -37,6 +38,22 @@ class AuthController extends Controller
         }
 
         // all good so return the token
+        return $this->response->array(compact('token'));
+    }
+
+    public function refreshToken(Request $request)
+    {
+        $token  =   $request->get('token');
+        if(!$token)
+        {
+            return $this->response->errorBadRequest('Token not provided');
+        }
+        try {
+            $token  =   \JWTAuth::refresh($token);
+        }
+        catch(TokenInvalidException $e) {
+            return $this->response->errorForbidden('Invalid token provided');
+        }
         return $this->response->array(compact('token'));
     }
 
